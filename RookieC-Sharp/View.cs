@@ -6,6 +6,7 @@ namespace RookieC_Sharp
     {
         public static void bordview(string[,] rows)
         {
+            Console.WriteLine("今はこんな状況です");
             for (int i = 0; i < rows.GetLength(0); i++)
             {
                 Console.Write("|");
@@ -21,7 +22,7 @@ namespace RookieC_Sharp
                     }
                     else
                     {
-                        Console.Write("|");
+                        Console.Write(" |");
                     }
                     
                 }

@@ -1,5 +1,10 @@
 ﻿namespace RookieC_Sharp
 {
+    public enum Rows
+    {
+        Circle,    //まる
+        Cross    //ばつ
+    }
     public class Human
     {
         protected string Name { get; set; }

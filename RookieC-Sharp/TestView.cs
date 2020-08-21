@@ -6,8 +6,7 @@ namespace RookieC_Sharp
     {
         public static string[,] testview()
         {
-            int i = 0;
-            int j = 0;
+            int i, j;
             string[,] bord;
             bord = new string[5,5];
             for (i = 0; i < 5; i++)

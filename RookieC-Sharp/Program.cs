@@ -8,29 +8,86 @@ namespace RookieC_Sharp
     {
         static void Main(string[] args)
         {
-            string[,] bord;
-            bord = new string[5,5];
-            int[] innum;
-            innum = input();
-            Console.WriteLine(innum[0] + "平山" + innum[1]);
-            // bord = TestView.testview();
-            // View.bordview(bord);
-            
+            // IBord[] rule =
+            // {
+            //     new Check(), 
+            //     new Put(), 
+            //     new Jugement(), 
+            // };
+            Check check = new Check();
+            Put put = new Put();
+            Jugement jugement = new Jugement();
+            //二人のプレイヤーを作成
+            //まるちゃん
+            Human player = new Human
+            {
+                Rows = Rows.Circle
+            };
+            //ばつくん
+            Human enemy = new Human
+            {
+                Rows = Rows.Cross
+            };
+            //盤を作成　5*5の二次元配列
+            string[,] bord = new string[5, 5];
+            while (true)
+            {
+                //今の盤の状況を表示させます
+                View.bordview(bord);
+                //置きたい場所を入力させます
+                int[] num = input();
+                //置きたい盤にコマがないか判定します
+                //ここの入れ子はぐちゃってる　悲しい　
+                if (check.RowCount(num, bord, human: player))
+                {
+                    //なかったら置きます
+                    if (put.RowCount(num, bord, human: player))
+                    {
+                        //置きたい盤の周辺に同じコマが何個あるか判定します
+                        if (jugement.RowCount(num, bord, human: player))
+                        {
+                            Console.WriteLine("あなたの勝ちです。");
+                            View.bordview(bord);
+                        }
+                    }
+                }
 
+                //今の盤の状況を表示させます
+                View.bordview(bord);
+                //置きたい場所を入力させます
+                num = input();
+                //置きたい盤にコマがないか判定します
+                if (check.RowCount(num, bord, human: enemy))
+                {
+                    //なかったら置きます
+                    if (put.RowCount(num, bord, human: enemy))
+                    {
+                        //置きたい盤の周辺に同じコマが何個あるか判定します
+                        if (jugement.RowCount(num, bord, human: enemy))
+                        {
+                            Console.WriteLine("あなたの勝ちです。");
+                            View.bordview(bord);
+                        }
+                    }
+                }
+            }
         }
 
         static int[] input()
         {
             string str;
             int[] result;
+            // Console.WriteLine("名前を入力してください");
+            // str = Console.ReadLine();
+            // name = str;
             Console.WriteLine("書きたい場所を指定してください");
             str = Console.ReadLine();
-                result = str
+            //こういうのLinQと言うらしい　おしゃれ
+            result = str
                 .Split(',')
                 .Select(a => int.Parse(a))
                 .ToArray();
             return result;
         }
-
     }
 }

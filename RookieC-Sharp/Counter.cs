@@ -64,9 +64,10 @@ namespace RookieC_Sharp
     //決めた場所に何もないかを判定
     public class Check : IBord
     {
+
         public bool RowCount(int[] num, string[,] bord, Human human)
         {
-            if (bord[(num[0]), (num[1])] == null)
+            if (bord[num[0], num[1]] == null)
             {
                 return true;
             }
