@@ -29,7 +29,8 @@ namespace RookieC_Sharp
                 Rows = Rows.Cross
             };
             //盤を作成　5*5の二次元配列
-            string[,] bord = new string[5, 5];
+            //と、思ったけど添え字が配列の外を示しちゃうときがあるため7*7で作ってみる
+            string[,] bord = new string[7, 7];
             while (true)
             {
                 //今の盤の状況を表示させます
@@ -46,8 +47,10 @@ namespace RookieC_Sharp
                         //置きたい盤の周辺に同じコマが何個あるか判定します
                         if (jugement.RowCount(num, bord, human: player))
                         {
+                            put.RowCount(num, bord, human: player);
                             Console.WriteLine("あなたの勝ちです。");
                             View.bordview(bord);
+                            Environment.Exit(0);
                         }
                     }
                 }
@@ -67,6 +70,7 @@ namespace RookieC_Sharp
                         {
                             Console.WriteLine("あなたの勝ちです。");
                             View.bordview(bord);
+                            Environment.Exit(0);
                         }
                     }
                 }

@@ -6,4 +6,22 @@
         <RootNamespace>RookieC_Sharp</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Content Include="obj\Debug\netcoreapp3.1\RookieC-Sharp.AssemblyInfoInputs.cache" />
+      <Content Include="obj\Debug\netcoreapp3.1\RookieC-Sharp.assets.cache" />
+      <Content Include="obj\Debug\netcoreapp3.1\RookieC-Sharp.csproj.CoreCompileInputs.cache" />
+      <Content Include="obj\Debug\netcoreapp3.1\RookieC-Sharp.csproj.FileListAbsolute.txt" />
+      <Content Include="obj\Debug\netcoreapp3.1\RookieC-Sharp.csprojAssemblyReference.cache" />
+      <Content Include="obj\Debug\netcoreapp3.1\RookieC-Sharp.dll" />
+      <Content Include="obj\Debug\netcoreapp3.1\RookieC-Sharp.exe" />
+      <Content Include="obj\Debug\netcoreapp3.1\RookieC-Sharp.genruntimeconfig.cache" />
+      <Content Include="obj\Debug\netcoreapp3.1\RookieC-Sharp.pdb" />
+      <Content Include="obj\project.assets.json" />
+      <Content Include="obj\project.nuget.cache" />
+      <Content Include="obj\project.packagespec.json" />
+      <Content Include="obj\RookieC-Sharp.csproj.nuget.dgspec.json" />
+      <Content Include="obj\RookieC-Sharp.csproj.nuget.g.props" />
+      <Content Include="obj\RookieC-Sharp.csproj.nuget.g.targets" />
+    </ItemGroup>
+
 </Project>
