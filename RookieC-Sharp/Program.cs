@@ -7,30 +7,35 @@ namespace RookieC_Sharp
 {
     class Program
     {
+        /*
+         * @class Check まるバツを書きたい場所にすでに書かれていないか判定します
+         * @class put 入力されたマスに書きます。bord[,]が参照変数状態なのでわかりづらいかも
+         * @class jugement 4つ並んでいるか判定します
+         * @class Human プレイヤーを作成するクラス　名前を入力するメソッドが入っています
+         * @class view 盤の状況を表示させるクラス
+         */
         static void Main(string[] args)
         {
-            // IBord[] rule =
-            // {
-            //     new Check(), 
-            //     new Put(), 
-            //     new Jugement(), 
-            // };
             Check check = new Check();
             Put put = new Put();
             Jugement jugement = new Jugement();
             //二人のプレイヤーを作成
-            //まるちゃん
+            //まる
             Human player = new Human
             {
                 Rows = Rows.Circle
             };
-            //ばつくん
+            //名前の入力を促します
+            player.nameinput();
+            
+            //ばつ
             Human enemy = new Human
             {
                 Rows = Rows.Cross
             };
+            enemy.nameinput();
+            
             //盤を作成　5*5の二次元配列
-            //と、思ったけど添え字が配列の外を示しちゃうときがあるため7*7で作ってみる
             string[,] bord = new string[5, 5];
             while (true)
             {
@@ -48,8 +53,7 @@ namespace RookieC_Sharp
                         //置きたい盤の周辺に同じコマが何個あるか判定します
                         if (jugement.RowCount(num, bord, human: player))
                         {
-                            put.RowCount(num, bord, human: player);
-                            Console.WriteLine("あなたの勝ちです。");
+                            Console.WriteLine($"{player.Name}さんの勝ちです。");
                             View.bordview(bord);
                             Environment.Exit(0);
                         }
@@ -69,7 +73,7 @@ namespace RookieC_Sharp
                         //置きたい盤の周辺に同じコマが何個あるか判定します
                         if (jugement.RowCount(num, bord, human: enemy))
                         {
-                            Console.WriteLine("あなたの勝ちです。");
+                            Console.WriteLine($"{enemy.Name}さんの勝ちです。");
                             View.bordview(bord);
                             Environment.Exit(0);
                         }
@@ -77,16 +81,13 @@ namespace RookieC_Sharp
                 }
             }
         }
-
         
+        //盤のマスの入力を促します
         static int[] input(Human human)
         {
             string str;
             int[] result;
-            // Console.WriteLine("名前を入力してください");
-            // str = Console.ReadLine();
-            // name = str;
-            Console.WriteLine($"{human.Rows}の番です。");
+            Console.WriteLine($"{human.Name}さんの番です。");
             Console.WriteLine("行,列の形で入力してください");
             str = Console.ReadLine();
             //こういうのLinQと言うらしい　おしゃれ

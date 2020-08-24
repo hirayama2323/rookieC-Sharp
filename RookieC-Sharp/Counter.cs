@@ -20,7 +20,7 @@ namespace RookieC_Sharp
                     {
                         continue;
                     }
-
+                    //配列の添え字に予期しない数値が入るのを抑制
                     if (num[0] + i < 0 || num[1] + j < 0 || num[0] + i >= 5 || num[1] + j >= 5)
                     {
                         continue;
@@ -36,22 +36,24 @@ namespace RookieC_Sharp
                             //自分のだった場合、何個並んでいるか数える
                             for (int k = 1; k < 5; k++)
                             {
+                                //配列の添え字に予期しない数値が入るのを抑制
                                 if (num[0] + i * k < 0 || num[1] + j * k < 0 || num[0] + i * k >= 5 || num[1] + j * k >= 5)
                                 {
                                     continue;
                                 }
+                                //1マス進んだ先にコマがあるかどうか判定
                                 if (bord[num[0] + i * k, num[1] + j * k] == null)
                                 {
                                     break;
                                 }
-
+                                //あったらそれが自分の書いたものか判定
                                 if (bord[num[0] + (i * k), num[1] + (j * k)] == human.Rows.ToString())
                                 {
                                     count++;
                                 }
                             }
 
-                            //反対側も数える
+                            //反対側も数える kに-1を積るだけ
                             for (int k = 1; k < 5; k++)
                             {
                                 if (num[0] + i * -k < 0 || num[1] + j * -k < 0 || num[0] + i * -k >= 5 || num[1] + j * -k >= 5)
@@ -97,7 +99,7 @@ namespace RookieC_Sharp
         }
     }
 
-    //置く
+    //置く 参照
     public class Put : IBord
     {
         public bool RowCount(int[] num, string[,] bord, Human human)
