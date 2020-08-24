@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace RookieC_Sharp
 {
@@ -30,13 +31,13 @@ namespace RookieC_Sharp
             };
             //盤を作成　5*5の二次元配列
             //と、思ったけど添え字が配列の外を示しちゃうときがあるため7*7で作ってみる
-            string[,] bord = new string[7, 7];
+            string[,] bord = new string[5, 5];
             while (true)
             {
                 //今の盤の状況を表示させます
                 View.bordview(bord);
                 //置きたい場所を入力させます
-                int[] num = input();
+                int[] num = input(player);
                 //置きたい盤にコマがないか判定します
                 //ここの入れ子はぐちゃってる　悲しい　
                 if (check.RowCount(num, bord, human: player))
@@ -58,7 +59,7 @@ namespace RookieC_Sharp
                 //今の盤の状況を表示させます
                 View.bordview(bord);
                 //置きたい場所を入力させます
-                num = input();
+                num = input(enemy);
                 //置きたい盤にコマがないか判定します
                 if (check.RowCount(num, bord, human: enemy))
                 {
@@ -77,20 +78,36 @@ namespace RookieC_Sharp
             }
         }
 
-        static int[] input()
+        
+        static int[] input(Human human)
         {
             string str;
             int[] result;
             // Console.WriteLine("名前を入力してください");
             // str = Console.ReadLine();
             // name = str;
-            Console.WriteLine("書きたい場所を指定してください");
+            Console.WriteLine($"{human.Rows}の番です。");
+            Console.WriteLine("行,列の形で入力してください");
             str = Console.ReadLine();
             //こういうのLinQと言うらしい　おしゃれ
-            result = str
-                .Split(',')
-                .Select(a => int.Parse(a))
-                .ToArray();
+            while (true)
+            {
+                //正規表現で入力チェック　正規表現なんとなくわかってきた
+                if (Regex.IsMatch(str, "^[1-5],[1-5]$"))
+                {
+                    result = str
+                        .Split(',')
+                        .Select(a => int.Parse(a))
+                        .ToArray();
+                    result[1] -= 1;
+                    result[0] -= 1;
+                    break;
+                }
+
+                Console.WriteLine("行,列の形で入力してください");
+                str = Console.ReadLine();
+            }
+
             return result;
         }
     }

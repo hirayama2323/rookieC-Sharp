@@ -9,7 +9,11 @@ namespace RookieC_Sharp
             Console.WriteLine("今はこんな状況です");
             for (int i = 0; i < rows.GetLength(0); i++)
             {
-                Console.Write("|");
+                if (i==0)
+                {
+                    Console.WriteLine("   1  2  3  4  5");
+                }
+                Console.Write($"{i+1}|");
                 for (int j = 0; j < rows.GetLength(1); j++)
                 {
                     if (rows[i,j] == Rows.Circle.ToString())
@@ -18,11 +22,11 @@ namespace RookieC_Sharp
                     }
                     else if (rows[i,j] == Rows.Cross.ToString())
                     {
-                        Console.Write("×|");
+                        Console.Write("Ｘ|");
                     }
                     else
                     {
-                        Console.Write(" |");
+                        Console.Write("　|");
                     }
                     
                 }

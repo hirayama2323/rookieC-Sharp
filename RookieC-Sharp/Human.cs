@@ -12,6 +12,8 @@
         protected int Age { get; set; }
 
         public Rows Rows { get; set; }
+        
+        public bool victory { get; set; }
 
     }
 }
