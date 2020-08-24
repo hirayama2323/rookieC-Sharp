@@ -10,3 +10,8 @@ investigating...
 Maybe completed.<br>
 It was refalencing outside the array.<br>
 and not counted correctly.
+
+### helphul
+Interface learned how to use.<br>
+In concept put together.
+This time I summarized by rule.
