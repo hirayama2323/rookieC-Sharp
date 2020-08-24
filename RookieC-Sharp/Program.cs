@@ -42,7 +42,7 @@ namespace RookieC_Sharp
                 //今の盤の状況を表示させます
                 View.bordview(bord);
                 //置きたい場所を入力させます
-                int[] num = input(player);
+                int[] num = input(player,bord);
                 //置きたい盤にコマがないか判定します
                 //ここの入れ子はぐちゃってる　悲しい　
                 if (check.RowCount(num, bord, human: player))
@@ -63,7 +63,7 @@ namespace RookieC_Sharp
                 //今の盤の状況を表示させます
                 View.bordview(bord);
                 //置きたい場所を入力させます
-                num = input(enemy);
+                num = input(enemy,bord);
                 //置きたい盤にコマがないか判定します
                 if (check.RowCount(num, bord, human: enemy))
                 {
@@ -83,7 +83,7 @@ namespace RookieC_Sharp
         }
         
         //盤のマスの入力を促します
-        static int[] input(Human human)
+        static int[] input(Human human,string[,] bord)
         {
             string str;
             int[] result;
@@ -100,8 +100,17 @@ namespace RookieC_Sharp
                         .Split(',')
                         .Select(a => int.Parse(a))
                         .ToArray();
+                    
                     result[1] -= 1;
                     result[0] -= 1;
+                    //すでに書かれていたらもう一度入力を促す
+                    if (bord[result[0],result[1]] != null)
+                    {
+                        Console.WriteLine("そこにはすでにコマが書かれています");
+                        Console.WriteLine("行,列の形で入力してください");
+                        str = Console.ReadLine();
+                        continue;
+                    }
                     break;
                 }
 
