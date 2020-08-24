@@ -5,3 +5,8 @@ This program is incomplete.
 ### Note
 It may have gone out of the array.<br>
 investigating...
+
+### 8/24 Fix.
+Maybe completed.<br>
+It was refalencing outside the array.<br>
+and not counted correctly.
