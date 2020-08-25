@@ -1,6 +1,6 @@
 # rookieC-Sharp
 It is a program to 4 row.<br>
-Created in C#.
+Created in C#.<br>
 Maybe it worked when clone to Rider.
 
 ### 8/25 Fix.
