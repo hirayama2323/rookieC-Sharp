@@ -1,6 +1,7 @@
 # rookieC-Sharp
 It is a program to 4 row.<br>
-This program is incomplete.
+Created in C#.
+Maybe it worked when clone to Rider.
 
 ### 8/25 Fix.
 Input processing was added to the method.<br>
