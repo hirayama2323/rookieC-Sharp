@@ -4,15 +4,22 @@ using System.Text.RegularExpressions;
 
 namespace RookieC_Sharp
 {
+    /// <summary>
+    /// 〇と✕を列挙型で列挙しておきます
+    /// </summary>
     public enum Rows
     {
         Circle, //まる
         Cross //ばつ
     }
 
-    /*    人を作ります    */
+    
+    /// <summary>
+    ///  人を作ります
+    /// </summary>
     public class Human
     {
+        
         public string Name { get; set; }
 
         protected int Age { get; set; }
@@ -21,16 +28,25 @@ namespace RookieC_Sharp
 
         public bool victory { get; set; }
 
-        //名前の入力を促すメソッド
+       
+        /// <summary>
+        /// 名前の入力を促すメソッド
+        /// </summary>
         public void nameinput()
         {
             Console.WriteLine($"{Rows}を使用する方の名前を入力してください");
             this.Name = Console.ReadLine();
         }
 
-        //このメソッドで入力を促します
+        
+        /// <summary>
+        /// このメソッドで入力を促します
+        /// </summary>
+        /// <param name="bord"></param>
+        /// <returns>妥当性確認された行列の数字が返ります</returns>
         public int[] putinput(string[,] bord)
         {
+            
             /*
              * @param str 一時的に入力された文字列を格納する箱
              * @param result 入力された文字列を数値にして格納する箱
