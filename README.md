@@ -1,10 +1,11 @@
 # rookieC-Sharp
 It is a program to 4 row.<br>
-This program is incomplete.
+Created in C#.<br>
+Maybe it worked when clone to Rider.
 
-### Note
-It may have gone out of the array.<br>
-investigating...
+### 8/25 Fix.
+Input processing was added to the method.<br>
+Create a bord class.
 
 ### 8/24 Fix.
 Maybe completed.<br>
