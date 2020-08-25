@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace RookieC_Sharp
 {
+    //n目並べにしたい
     class Program
     {
         /*
@@ -20,6 +21,12 @@ namespace RookieC_Sharp
             Check check = new Check();
             Put put = new Put();
             Jugement jugement = new Jugement();
+            
+            //盤を作成　n*nの二次元配列
+            Bord bord = new Bord();
+            //何目並べか入力を促します。
+            bord.sizeinput();
+            
             //二人のプレイヤーを作成
             //まる
             Human player = new Human
@@ -36,52 +43,46 @@ namespace RookieC_Sharp
             };
             enemy.nameinput();
             
-            //盤を作成　5*5の二次元配列
-            Bord bord = new Bord
-            {
-                size = 5,
-                bord = new string[5,5]
-            };
             
             /*    ここから戦い    */
             while (true)
             {
                 //今の盤の状況を表示させます
-                View.bordview(bord.bord);
+                View.bordview(bord);
                 //置きたい場所を入力させます
                 int[] num = player.putinput(bord.bord);
                 //置きたい盤にコマがないか判定します
                 //ここの入れ子はぐちゃってる　悲しい　
-                if (check.RowCount(num, bord.bord, human: player))
+                if (check.RowCount(num, bord, human: player))
                 {
                     //なかったら置きます
-                    if (put.RowCount(num, bord.bord, human: player))
+                    if (put.RowCount(num, bord, human: player))
                     {
                         //置きたい盤の周辺に同じコマが何個あるか判定します
-                        if (jugement.RowCount(num, bord.bord, human: player))
+                        if (jugement.RowCount(num, bord, human: player))
                         {
                             Console.WriteLine($"{player.Name}さんの勝ちです。");
-                            View.bordview(bord.bord);
+                            View.bordview(bord);
                             Environment.Exit(0);
                         }
                     }
                 }
 
                 //今の盤の状況を表示させます
-                View.bordview(bord.bord);
+                View.bordview(bord);
                 //置きたい場所を入力させます
                 num = enemy.putinput(bord.bord);
                 //置きたい盤にコマがないか判定します
-                if (check.RowCount(num, bord.bord, human: enemy))
+                if (check.RowCount(num, bord, human: enemy))
                 {
                     //なかったら置きます
-                    if (put.RowCount(num, bord.bord, human: enemy))
+                    if (put.RowCount(num, bord, human: enemy))
                     {
                         //置きたい盤の周辺に同じコマが何個あるか判定します
-                        if (jugement.RowCount(num, bord.bord, human: enemy))
+                        if (jugement.RowCount(num, bord, human: enemy))
                         {
                             Console.WriteLine($"{enemy.Name}さんの勝ちです。");
-                            View.bordview(bord.bord);
+                            View.bordview(bord);
                             Environment.Exit(0);
                         }
                     }

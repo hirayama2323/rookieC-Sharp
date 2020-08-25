@@ -5,7 +5,7 @@ namespace RookieC_Sharp
     //4つ並んでいるか調べるクラス
     public class Jugement : IBord
     {
-        public bool RowCount(int[] num, string[,] bord, Human human)
+        public bool RowCount(int[] num, Bord bord, Human human)
         {
             //わかりやすく1を入れとく
             int count = 1;
@@ -21,58 +21,60 @@ namespace RookieC_Sharp
                         continue;
                     }
                     //配列の添え字に予期しない数値が入るのを抑制
-                    if (num[0] + i < 0 || num[1] + j < 0 || num[0] + i >= 5 || num[1] + j >= 5)
+                    if (num[0] + i < 0 || num[1] + j < 0 || num[0] + i >= bord.size+2 || num[1] + j >= bord.size+2)
                     {
                         continue;
                     }
 
                     //周囲８マスを調べてコマが置いてあるか判定
-                    if (bord[(num[0] + i), (num[1] + j)] != null)
+                    if (bord.bord[(num[0] + i), (num[1] + j)] != null)
                     {
                         //置いてあったら自分のかどうか判定
-                        if (bord[num[0] + i, num[1] + j] == human.Rows.ToString())
+                        if (bord.bord[num[0] + i, num[1] + j] == human.Rows.ToString())
                         {
                             count++;
                             //自分のだった場合、何個並んでいるか数える
-                            for (int k = 1; k < 5; k++)
+                            for (int k = 1; k <= bord.size; k++)
                             {
-                                //配列の添え字に予期しない数値が入るのを抑制
-                                if (num[0] + i * k < 0 || num[1] + j * k < 0 || num[0] + i * k >= 5 || num[1] + j * k >= 5)
+                                //配列の添え字を超えそうになったら飛ばす
+                                if (num[0] + i * k < 0 || num[1] + j * k < 0 || num[0] + i * k >= bord.size+2 || num[1] + j * k >= bord.size+2)
                                 {
                                     continue;
                                 }
                                 //1マス進んだ先にコマがあるかどうか判定
-                                if (bord[num[0] + i * k, num[1] + j * k] == null)
+                                if (bord.bord[num[0] + i * k, num[1] + j * k] == null)
                                 {
                                     break;
                                 }
                                 //あったらそれが自分の書いたものか判定
-                                if (bord[num[0] + (i * k), num[1] + (j * k)] == human.Rows.ToString())
+                                if (bord.bord[num[0] + (i * k), num[1] + (j * k)] == human.Rows.ToString())
                                 {
+                                    Console.WriteLine(count);
                                     count++;
                                 }
                             }
 
                             //反対側も数える kに-1を積るだけ
-                            for (int k = 1; k < 5; k++)
+                            for (int k = 1; k<= bord.size; k++)
                             {
-                                if (num[0] + i * -k < 0 || num[1] + j * -k < 0 || num[0] + i * -k >= 5 || num[1] + j * -k >= 5)
+                                if (num[0] + i * -k < 0 || num[1] + j * -k < 0 || num[0] + i * -k >= bord.size+2 || num[1] + j * -k >= bord.size+2)
                                 {
                                     continue;
                                 }
-                                if (bord[num[0] + i * -k, num[1] + j * -k] == null)
+                                if (bord.bord[num[0] + i * -k, num[1] + j * -k] == null)
                                 {
                                     break;
                                 }
 
-                                if (bord[num[0] + i * -k, num[1] + j * -k] == human.Rows.ToString())
+                                if (bord.bord[num[0] + i * -k, num[1] + j * -k] == human.Rows.ToString())
                                 {
+                                    Console.WriteLine(count);
                                     count++;
                                 }
                             }
 
-                            //4個以上あったら帰る
-                            if (count >= 4)
+                            //n個以上あったら帰る
+                            if (count >= bord.size)
                             {
                                 return true;
                             }
@@ -88,9 +90,9 @@ namespace RookieC_Sharp
     //決めた場所に何もないかを判定
     public class Check : IBord
     {
-        public bool RowCount(int[] num, string[,] bord, Human human)
+        public bool RowCount(int[] num, Bord bord, Human human)
         {
-            if (bord[num[0], num[1]] == null)
+            if (bord.bord[num[0], num[1]] == null)
             {
                 return true;
             }
@@ -102,15 +104,15 @@ namespace RookieC_Sharp
     //置く 参照使ってるから要修正
     public class Put : IBord
     {
-        public bool RowCount(int[] num, string[,] bord, Human human)
+        public bool RowCount(int[] num, Bord bord, Human human)
         {
             if (human.Rows == Rows.Circle)
             {
-                bord[(num[0]), (num[1])] = Rows.Circle.ToString();
+                bord.bord[(num[0]), (num[1])] = Rows.Circle.ToString();
             }
             else
             {
-                bord[(num[0]), (num[1])] = Rows.Cross.ToString();
+                bord.bord[(num[0]), (num[1])] = Rows.Cross.ToString();
             }
 
             return true;

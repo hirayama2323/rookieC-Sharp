@@ -2,7 +2,7 @@
 {
     public interface IBord
     {
-        bool RowCount(int[] num,string[,] bord,Human human);
+        bool RowCount(int[] num,Bord bord,Human human);
     }
     
 }

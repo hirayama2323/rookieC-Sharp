@@ -44,7 +44,7 @@ namespace RookieC_Sharp
             while (true)
             {
                 //正規表現で入力チェック　正規表現なんとなくわかってきた
-                if (Regex.IsMatch(str, "^[1-5],[1-5]$"))
+                if (Regex.IsMatch(str, "^[1-" + bord.GetLength(0) + "],[1-" + bord.GetLength(1) + "]$"))
                 {
                     //文字列をカンマを基準にバラします
                     //こういうのLinQと言うらしい　おしゃれ
@@ -67,6 +67,7 @@ namespace RookieC_Sharp
                     break;
                 }
 
+                Console.WriteLine("入力値が不正です");
                 Console.WriteLine("行,列の形で入力してください");
                 str = Console.ReadLine();
             }

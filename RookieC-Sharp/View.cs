@@ -5,23 +5,26 @@ namespace RookieC_Sharp
     /*    出力用    */
     public static class View
     {
-        public static void bordview(string[,] rows)
+        public static void bordview(Bord bord)
         {
             Console.WriteLine("今はこんな状況です");
-            for (int i = 0; i < rows.GetLength(0); i++)
+            Console.Write("   1");
+            for (int k=2 ;k<=bord.bord.GetLength(0);k++)
             {
-                if (i==0)
-                {
-                    Console.WriteLine("   1  2  3  4  5");
-                }
+                Console.Write($"  {k}");
+            }
+            Console.WriteLine("");
+            for (int i = 0; i < bord.bord.GetLength(0); i++)
+            {
+                
                 Console.Write($"{i+1}|");
-                for (int j = 0; j < rows.GetLength(1); j++)
+                for (int j = 0; j <bord.bord.GetLength(1); j++)
                 {
-                    if (rows[i,j] == Rows.Circle.ToString())
+                    if (bord.bord[i,j] == Rows.Circle.ToString())
                     {
                         Console.Write("〇|");
                     }
-                    else if (rows[i,j] == Rows.Cross.ToString())
+                    else if (bord.bord[i,j] == Rows.Cross.ToString())
                     {
                         Console.Write("Ｘ|");
                     }
