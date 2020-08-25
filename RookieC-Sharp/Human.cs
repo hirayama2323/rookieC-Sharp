@@ -46,32 +46,27 @@ namespace RookieC_Sharp
         /// <returns>妥当性確認された行列の数字が返ります</returns>
         public int[] putinput(string[,] bord)
         {
-            
-            /*
-             * @param str 一時的に入力された文字列を格納する箱
-             * @param result 入力された文字列を数値にして格納する箱
-             */
             string str;
             int[] result;
             Console.WriteLine($"{Name}さんの番です。");
             Console.WriteLine("行,列の形で入力してください");
             str = Console.ReadLine();
-            //入力を間違う回数がわからないので無限ループにしました
+            // 入力を間違う回数がわからないので無限ループにしました
             while (true)
             {
-                //正規表現で入力チェック　正規表現なんとなくわかってきた
+                // 正規表現で入力チェック　正規表現なんとなくわかってきた
                 if (Regex.IsMatch(str, "^[1-" + bord.GetLength(0) + "],[1-" + bord.GetLength(1) + "]$"))
                 {
-                    //文字列をカンマを基準にバラします
-                    //こういうのLinQと言うらしい　おしゃれ
+                    // 文字列をカンマを基準にバラします
+                    // こういうのLinQと言うらしい　おしゃれ
                     result = str
                         .Split(',')
                         .Select(a => int.Parse(a))
                         .ToArray();
-                    //配列の添え字と対応するように減算します
+                    // 配列の添え字と対応するように減算します
                     result[1] -= 1;
                     result[0] -= 1;
-                    //すでに書かれていたらもう一度入力を促す
+                    // すでに書かれていたらもう一度入力を促す
                     if (bord[result[0], result[1]] != null)
                     {
                         Console.WriteLine("そこにはすでにコマが書かれています");
