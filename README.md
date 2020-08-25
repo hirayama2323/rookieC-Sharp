@@ -3,6 +3,11 @@ It is a program to 4 row.<br>
 Created in C#.<br>
 Maybe it worked when clone to Rider.
 
+## 8/25 Update.
+Corresponding to 1row to 6row.<br>
+Input before playing please choice.
+<br>
+##
 ### 8/25 Fix.
 Input processing was added to the method.<br>
 Create a bord class.
