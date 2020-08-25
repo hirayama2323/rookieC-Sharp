@@ -85,17 +85,21 @@ namespace RookieC_Sharp
         //盤のマスの入力を促します
         static int[] input(Human human,string[,] bord)
         {
+            /*
+             * @param str 一時的に入力された文字列を格納する箱
+             * 
+             */
             string str;
             int[] result;
             Console.WriteLine($"{human.Name}さんの番です。");
             Console.WriteLine("行,列の形で入力してください");
             str = Console.ReadLine();
-            //こういうのLinQと言うらしい　おしゃれ
             while (true)
             {
                 //正規表現で入力チェック　正規表現なんとなくわかってきた
                 if (Regex.IsMatch(str, "^[1-5],[1-5]$"))
                 {
+                    //こういうのLinQと言うらしい　おしゃれ
                     result = str
                         .Split(',')
                         .Select(a => int.Parse(a))
