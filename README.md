@@ -3,7 +3,7 @@ It is a program to 4 row.<br>
 This program is incomplete.
 
 ### 8/25 Fix.
-Input processing was added to the method.
+Input processing was added to the method.<br>
 Create a bord class.
 
 ### 8/24 Fix.
