@@ -2,6 +2,7 @@
 
 namespace RookieC_Sharp
 {
+    /*    出力用    */
     public static class View
     {
         public static void bordview(string[,] rows)

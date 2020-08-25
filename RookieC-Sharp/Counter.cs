@@ -99,7 +99,7 @@ namespace RookieC_Sharp
         }
     }
 
-    //置く 参照
+    //置く 参照使ってるから要修正
     public class Put : IBord
     {
         public bool RowCount(int[] num, string[,] bord, Human human)

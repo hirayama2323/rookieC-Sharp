@@ -16,6 +16,7 @@ namespace RookieC_Sharp
          */
         static void Main(string[] args)
         {
+            /*   初期設定     */
             Check check = new Check();
             Put put = new Put();
             Jugement jugement = new Jugement();
@@ -36,93 +37,56 @@ namespace RookieC_Sharp
             enemy.nameinput();
             
             //盤を作成　5*5の二次元配列
-            string[,] bord = new string[5, 5];
+            Bord bord = new Bord
+            {
+                size = 5,
+                bord = new string[5,5]
+            };
+            
+            /*    ここから戦い    */
             while (true)
             {
                 //今の盤の状況を表示させます
-                View.bordview(bord);
+                View.bordview(bord.bord);
                 //置きたい場所を入力させます
-                int[] num = input(player,bord);
+                int[] num = player.putinput(bord.bord);
                 //置きたい盤にコマがないか判定します
                 //ここの入れ子はぐちゃってる　悲しい　
-                if (check.RowCount(num, bord, human: player))
+                if (check.RowCount(num, bord.bord, human: player))
                 {
                     //なかったら置きます
-                    if (put.RowCount(num, bord, human: player))
+                    if (put.RowCount(num, bord.bord, human: player))
                     {
                         //置きたい盤の周辺に同じコマが何個あるか判定します
-                        if (jugement.RowCount(num, bord, human: player))
+                        if (jugement.RowCount(num, bord.bord, human: player))
                         {
                             Console.WriteLine($"{player.Name}さんの勝ちです。");
-                            View.bordview(bord);
+                            View.bordview(bord.bord);
                             Environment.Exit(0);
                         }
                     }
                 }
 
                 //今の盤の状況を表示させます
-                View.bordview(bord);
+                View.bordview(bord.bord);
                 //置きたい場所を入力させます
-                num = input(enemy,bord);
+                num = enemy.putinput(bord.bord);
                 //置きたい盤にコマがないか判定します
-                if (check.RowCount(num, bord, human: enemy))
+                if (check.RowCount(num, bord.bord, human: enemy))
                 {
                     //なかったら置きます
-                    if (put.RowCount(num, bord, human: enemy))
+                    if (put.RowCount(num, bord.bord, human: enemy))
                     {
                         //置きたい盤の周辺に同じコマが何個あるか判定します
-                        if (jugement.RowCount(num, bord, human: enemy))
+                        if (jugement.RowCount(num, bord.bord, human: enemy))
                         {
                             Console.WriteLine($"{enemy.Name}さんの勝ちです。");
-                            View.bordview(bord);
+                            View.bordview(bord.bord);
                             Environment.Exit(0);
                         }
                     }
                 }
             }
-        }
-        
-        //盤のマスの入力を促します
-        static int[] input(Human human,string[,] bord)
-        {
-            /*
-             * @param str 一時的に入力された文字列を格納する箱
-             * 
-             */
-            string str;
-            int[] result;
-            Console.WriteLine($"{human.Name}さんの番です。");
-            Console.WriteLine("行,列の形で入力してください");
-            str = Console.ReadLine();
-            while (true)
-            {
-                //正規表現で入力チェック　正規表現なんとなくわかってきた
-                if (Regex.IsMatch(str, "^[1-5],[1-5]$"))
-                {
-                    //こういうのLinQと言うらしい　おしゃれ
-                    result = str
-                        .Split(',')
-                        .Select(a => int.Parse(a))
-                        .ToArray();
-                    
-                    result[1] -= 1;
-                    result[0] -= 1;
-                    //すでに書かれていたらもう一度入力を促す
-                    if (bord[result[0],result[1]] != null)
-                    {
-                        Console.WriteLine("そこにはすでにコマが書かれています");
-                        Console.WriteLine("行,列の形で入力してください");
-                        str = Console.ReadLine();
-                        continue;
-                    }
-                    break;
-                }
-
-                Console.WriteLine("行,列の形で入力してください");
-                str = Console.ReadLine();
-            }
-
-            return result;
         }
     }
 }
