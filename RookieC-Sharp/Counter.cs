@@ -130,20 +130,20 @@ namespace RookieC_Sharp
     /// 置く
     /// 参照使ってるから要修正
     /// </summary>
-    public class Put : IBord
-    {
-        public bool RowCount(int[] num, Bord bord, Human human)
-        {
-            if (human.Rows == Rows.Circle)
-            {
-                bord.bord[(num[0]), (num[1])] = Rows.Circle.ToString();
-            }
-            else
-            {
-                bord.bord[(num[0]), (num[1])] = Rows.Cross.ToString();
-            }
-
-            return true;
-        }
-    }
+    // public class Put : IBord
+    // {
+    //     public bool RowCount(int[] num, Bord bord, Human human)
+    //     {
+    //         if (human.Rows == Rows.Circle)
+    //         {
+    //             bord.bord[(num[0]), (num[1])] = Rows.Circle.ToString();
+    //         }
+    //         else
+    //         {
+    //             bord.bord[(num[0]), (num[1])] = Rows.Cross.ToString();
+    //         }
+    //
+    //         return true;
+    //     }
+    // }
 }

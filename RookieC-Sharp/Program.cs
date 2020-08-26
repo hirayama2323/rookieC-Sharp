@@ -18,11 +18,6 @@ namespace RookieC_Sharp
         static void Main(string[] args)
         {
             // 初期設定     
-            
-
-            Check check = new Check();
-            Put put = new Put();
-            Jugement jugement = new Jugement();
             string str;
 
             // 盤を作成　n*nの二次元配列
@@ -39,30 +34,37 @@ namespace RookieC_Sharp
                 Console.WriteLine("入力値が不正です");
             } while (true);
 
-            // 二人のプレイヤーを作成
-            // まる
-            Human player = new Human
+            // プレイヤー二人をまとめておく
+            Human player, enemy;
+            Human[] human =
             {
-                Rows = Rows.Circle
+              player = new Human
+                {
+                    Rows = Rows.Circle
+                }, 
+              enemy = new Human
+              {
+                  Rows = Rows.Cross
+              } 
             };
-            // 名前の入力を促します
             
+            // プレイヤー二人に名前を入力してもらいます
             Console.WriteLine($"{player.Rows}を使用する方の名前を入力してください");
             player.nameinput(Console.ReadLine());
 
-            // ばつ
-            Human enemy = new Human
-            {
-                Rows = Rows.Cross
-            };
             Console.WriteLine($"{enemy.Rows}を使用する方の名前を入力してください");
             enemy.nameinput(Console.ReadLine());
-            
+
             // ここから戦い
             while (true)
             {
-                bord.rule(player);
-                bord.rule(enemy);
+                foreach (var man in human)
+                {
+                    if (bord.rule(man))
+                    {
+                        Environment.Exit(0);
+                    }
+                }
             }
         }
     }

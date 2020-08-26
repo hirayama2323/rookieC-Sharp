@@ -23,15 +23,6 @@ namespace RookieC_Sharp
         /// <returns>チェックしてOKならtrueを返します</returns>
         public bool checknumber(string str)
         {
-            // if (Regex.IsMatch(str, "^[1-6]$"))
-            // {
-            //     return true;
-            // }
-            //
-            // return false;
-
-            // 条件演算子とか三項演算子というらしい
-            // <条件式> ? true:false;
             return Regex.IsMatch(str, "^[2-6]$") ? true : false;
         }
 
@@ -41,12 +32,6 @@ namespace RookieC_Sharp
         /// </summary>
         public bool sizeinput(string str)
         {
-            // do
-            // {
-            //ここmain
-            // Console.WriteLine("何個並んだら勝ちにしますか？\n※ 2～6の間でお願いします");
-            // str = Console.ReadLine();
-
             if (checknumber(str))
             {
                 Console.WriteLine($"{str}目並べを始めます");
@@ -56,25 +41,23 @@ namespace RookieC_Sharp
             }
 
             return false;
-
-            // Console.WriteLine("入力値が不正です");
-            // } while (true);
         }
 
-        public void rule(Human human)
+        public bool rule(Human human)
         {
             Check check = new Check();
             Jugement jugement = new Jugement();
-
             Bord tmpbord = new Bord();
+            
             tmpbord.size = size;
             tmpbord.bord = bord;
+            
+            
             View.bordview(tmpbord);
             // 置きたい場所を入力させます
             int[] num = human.putinput(tmpbord.bord);
-            
+
             // 置きたい盤にコマがないか判定します
-            // ここの入れ子はぐちゃってる　悲しい　
             if (check.RowCount(num, tmpbord, human: human))
             {
                 // なかったら置きます
@@ -84,9 +67,10 @@ namespace RookieC_Sharp
                 {
                     Console.WriteLine($"****{human.Name}さんの勝ちです。****");
                     View.bordview(tmpbord);
-                    Environment.Exit(0);
+                    return true;
                 }
             }
+            return false;
         }
 
         public void put(Bord tmpbord, Human human, int[] num)
