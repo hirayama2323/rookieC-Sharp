@@ -28,14 +28,14 @@ namespace RookieC_Sharp
 
         public bool victory { get; set; }
 
-       
+
         /// <summary>
         /// 名前の入力を促すメソッド
         /// </summary>
-        public void nameinput()
+        /// <param name="readLine"></param>
+        public void nameinput(string readLine)
         {
-            Console.WriteLine($"{Rows}を使用する方の名前を入力してください");
-            this.Name = Console.ReadLine();
+            this.Name = readLine;
         }
 
         

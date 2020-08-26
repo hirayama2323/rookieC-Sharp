@@ -62,7 +62,7 @@ namespace RookieC_Sharp
                                 // あったらそれが自分の書いたものか判定
                                 if (bord.bord[num[0] + (i * k), num[1] + (j * k)] == human.Rows.ToString())
                                 {
-                                    Console.WriteLine(count);
+                                    
                                     count++;
                                 }
                             }
@@ -83,7 +83,7 @@ namespace RookieC_Sharp
 
                                 if (bord.bord[num[0] + i * -k, num[1] + j * -k] == human.Rows.ToString())
                                 {
-                                    Console.WriteLine(count);
+                                    
                                     count++;
                                 }
                             }

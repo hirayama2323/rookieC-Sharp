@@ -32,30 +32,34 @@ namespace RookieC_Sharp
             
             // 条件演算子とか三項演算子というらしい
             // <条件式> ? true:false;
-           return Regex.IsMatch(str, "^[1-6]$") ? true : false;
+           return Regex.IsMatch(str, "^[2-6]$") ? true : false;
         }
 
         /// <summary>
         /// 何目並べをやりたいかを伺うクラス
         /// ここでついでに盤も作ってます
         /// </summary>
-        public void sizeinput()
+        public bool sizeinput(string str)
         {
-            string str;
-            do
-            {
-                Console.WriteLine("何個並んだら勝ちにしますか？\n※ 1～6の間でお願いします");
-                str = Console.ReadLine();
+            
+            // do
+            // {
+                //ここmain
+                // Console.WriteLine("何個並んだら勝ちにしますか？\n※ 2～6の間でお願いします");
+                // str = Console.ReadLine();
+                
                 if (checknumber(str))
                 {
                     Console.WriteLine($"{str}目並べを始めます");
                     this.size = Convert.ToInt32(str);
                     bord = new string[size + 2, size + 2];
-                    return;
+                    return true;
                 }
 
-                Console.WriteLine("入力値が不正です");
-            } while (true);
+                return false;
+
+                // Console.WriteLine("入力値が不正です");
+                // } while (true);
         }
     }
 }
