@@ -19,7 +19,11 @@ namespace RookieC_Sharp
         {
             // 初期設定     
             string str;
-
+            IBord[] ibord =
+            {
+                new Check(),
+                new Jugement()
+            };
             // 盤を作成　n*nの二次元配列
             Bord bord = new Bord();
             // 何目並べか入力を促します。
@@ -33,7 +37,6 @@ namespace RookieC_Sharp
                 }
                 Console.WriteLine("入力値が不正です");
             } while (true);
-
             // プレイヤー二人をまとめておく
             Human player, enemy;
             Human[] human =
@@ -47,7 +50,6 @@ namespace RookieC_Sharp
                   Rows = Rows.Cross
               } 
             };
-            
             // プレイヤー二人に名前を入力してもらいます
             Console.WriteLine($"{player.Rows}を使用する方の名前を入力してください");
             player.nameinput(Console.ReadLine());
@@ -60,7 +62,7 @@ namespace RookieC_Sharp
             {
                 foreach (var man in human)
                 {
-                    if (bord.rule(man))
+                    if (bord.rule(man,ibord))
                     {
                         Environment.Exit(0);
                     }

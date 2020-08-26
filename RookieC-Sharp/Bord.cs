@@ -42,28 +42,32 @@ namespace RookieC_Sharp
 
             return false;
         }
-
-        public bool rule(Human human)
+        
+        ///<summary>
+        /// 実際にn目並べをするメソッド
+        /// このクラスに入れてるのに違和感アリ
+        /// </summary>
+        /// <param name="human">プレイヤー</param>
+        /// <returns>n個以上あったらtrueを返してmainでシステムを終了します</returns>
+        public bool rule(Human human,IBord[] ibord)
         {
-            Check check = new Check();
-            Jugement jugement = new Jugement();
             Bord tmpbord = new Bord();
             
             tmpbord.size = size;
             tmpbord.bord = bord;
             
-            
+            //現在の状況を表示します
             View.bordview(tmpbord);
             // 置きたい場所を入力させます
             int[] num = human.putinput(tmpbord.bord);
 
             // 置きたい盤にコマがないか判定します
-            if (check.RowCount(num, tmpbord, human: human))
+            if (ibord[0].RowCount(num, tmpbord, human: human))
             {
                 // なかったら置きます
                 put(tmpbord, human, num);
                 // 置きたい盤の周辺に同じコマが何個あるか判定します
-                if (jugement.RowCount(num, tmpbord, human: human))
+                if (ibord[1].RowCount(num, tmpbord, human: human))
                 {
                     Console.WriteLine($"****{human.Name}さんの勝ちです。****");
                     View.bordview(tmpbord);
@@ -73,6 +77,13 @@ namespace RookieC_Sharp
             return false;
         }
 
+        /// <summary>
+        /// 実際にコマを書くメソッド
+        /// 便宜上put（置く）
+        /// </summary>
+        /// <param name="tmpbord"></param>
+        /// <param name="human"></param>
+        /// <param name="num"></param>
         public void put(Bord tmpbord, Human human, int[] num)
         {
             if (human.Rows == Rows.Circle)
