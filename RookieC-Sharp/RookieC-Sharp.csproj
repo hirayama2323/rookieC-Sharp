@@ -25,4 +25,8 @@
       <Content Include="obj\RookieC-Sharp.csproj.nuget.g.targets" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Tusin.cs" />
+    </ItemGroup>
+
 </Project>

@@ -17,8 +17,10 @@ namespace RookieC_Sharp
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            
             // 初期設定     
             string str;
+            var socket = new SocketClass();
             IBord[] ibord =
             {
                 new Check(),
@@ -53,20 +55,42 @@ namespace RookieC_Sharp
                 }
                 Console.WriteLine("入力値が不正です");
             } while (true);
-            
+
+            Console.WriteLine("サーバー側なら1 クライアント側なら2を入力してください");
+            var number = int.Parse(Console.ReadLine());
+
             // プレイヤー二人に名前を入力してもらいます
-            Console.WriteLine($"{player.Rows}を使用する方の名前を入力してください");
-            player.nameinput(Console.ReadLine());
+            if (number == 1)
+            {
+                Console.WriteLine($"{player.Rows}を使用する方の名前を入力してください");
+                player.nameinput(Console.ReadLine());
+            }
+            else 
+            {
+                Console.WriteLine($"{enemy.Rows}を使用する方の名前を入力してください");
+                enemy.nameinput(Console.ReadLine());
+            }
 
-            Console.WriteLine($"{enemy.Rows}を使用する方の名前を入力してください");
-            enemy.nameinput(Console.ReadLine());
-
+            // 通信して名前を入れ合う
+            if (number == 1)
+            {
+                enemy.nameinput(socket.Server(player.Name));
+            }
+            else
+            {
+                player.nameinput(socket.Client(enemy.Name));
+            }
+            
+            Console.WriteLine("こいつらの戦い");
+            Console.WriteLine($"{player.Name}と{enemy.Name}");
+            
             // ここから戦い
             while (true)
             {
                 foreach (var man in human)
                 {
-                    if (bord.rule(man,ibord))
+                    // n個以上コマがあったらtrueが返ってきてプログラムを終了する
+                    if (bord.rule(man,ibord,number))
                     {
                         Environment.Exit(0);
                     }

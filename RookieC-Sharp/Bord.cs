@@ -49,7 +49,7 @@ namespace RookieC_Sharp
         /// </summary>
         /// <param name="human">プレイヤー</param>
         /// <returns>n個以上あったらtrueを返してmainでシステムを終了します</returns>
-        public bool rule(Human human,IBord[] ibord)
+        public bool rule(Human human,IBord[] ibord,int number)
         {
             Bord tmpbord = new Bord();
             
@@ -59,7 +59,7 @@ namespace RookieC_Sharp
             //現在の状況を表示します
             View.bordview(tmpbord);
             // 置きたい場所を入力させます
-            int[] num = human.putinput(tmpbord.bord);
+            int[] num = human.putinput(tmpbord.bord,number);
 
             // 置きたい盤にコマがないか判定します
             if (ibord[0].RowCount(num, tmpbord, human: human))
